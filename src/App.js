@@ -1,10 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+import CategoryList from './CategoryList';
+import ProductList from './ProductList';
+import Navigation from './Navigation';
 
 function App() {
   return (
     <div>
-     <h3>selam</h3>
+      <Navigation/>
+      <CategoryList/>
+      <ProductList/>
     </div>
   );
 }
