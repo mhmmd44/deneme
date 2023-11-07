@@ -5,6 +5,8 @@ import Navigation from './Navigation';
 import { Container, Row, Col } from 'reactstrap';
 
 function App() {
+  let ProductInfo={title:"Product List"};
+  let CategoryInfo={title:"Category List"};
   return (
     <div>
       <Container>
@@ -14,11 +16,11 @@ function App() {
         </Row>  
         <Row>
           <Col xs="3">
-            <CategoryList />
+            <CategoryList info={CategoryInfo} />
 
           </Col>
           <Col xs="9">
-            <ProductList />
+            <ProductList info={ProductInfo}/>
 
           </Col>
 
