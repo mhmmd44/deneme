@@ -8,7 +8,7 @@ export default class ProductList extends Component {
         <h2>
           {this.props.info.title}--{this.props.currentCategory}
         </h2>
-        <Table>
+        <Table striped>
           <thead>
             <tr>
               <th>#</th>
