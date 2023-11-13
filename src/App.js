@@ -5,7 +5,7 @@ import Navigation from "./Navigation";
 import { Container, Row, Col } from "reactstrap";
 
 export default class App extends Component {
-  state = { currentCategory: "", products: [] };
+  state = { currentCategory: "", products: [], cart: [] };
 
   componentDidMount() {
     this.getProducts();
@@ -16,7 +16,7 @@ export default class App extends Component {
     this.getProducts(category.id);
   };
 
-  getProducts = categoryId => {
+  getProducts = (categoryId) => {
     let url = "http://localhost:3000/products";
     if (categoryId) {
       url += "?categoryId=" + categoryId;
@@ -27,15 +27,24 @@ export default class App extends Component {
       .then((data) => this.setState({ products: data }));
   };
 
+  addtoCart = (product) => {
+    let newCart = this.state.cart;
+    var addedItem = newCart.find((c) => c.product.id === product.id);
+    if (addedItem) {
+      addedItem.quantity += 1;
+    } else {
+      newCart.push({ product: product, quantity: 1 });
+    }
+    this.setState({ cart: newCart });
+  };
+
   render() {
     let ProductInfo = { title: "Product List" };
     let CategoryInfo = { title: "Category List" };
     return (
       <div>
         <Container>
-          <Row>
-            <Navigation />
-          </Row>
+          <Navigation cart={this.state.cart} />
           <Row>
             <Col xs="3">
               <CategoryList
@@ -47,6 +56,7 @@ export default class App extends Component {
             <Col xs="9">
               <ProductList
                 products={this.state.products}
+                addtoCart={this.addtoCart}
                 currentCategory={this.state.currentCategory}
                 info={ProductInfo}
               />
