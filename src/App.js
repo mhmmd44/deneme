@@ -38,13 +38,18 @@ export default class App extends Component {
     this.setState({ cart: newCart });
   };
 
+  removeFromCart=(product) => {
+    let newCart=this.state.cart.filter(c=>c.product.id!==product.id)
+    this.setState({cart:newCart})
+  }
+
   render() {
     let ProductInfo = { title: "Product List" };
     let CategoryInfo = { title: "Category List" };
     return (
       <div>
         <Container>
-          <Navigation cart={this.state.cart} />
+          <Navigation removeFromCart={this.removeFromCart} cart={this.state.cart} />
           <Row>
             <Col xs="3">
               <CategoryList
